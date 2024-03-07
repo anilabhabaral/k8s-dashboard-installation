@@ -30,6 +30,17 @@ kube-node-lease   Active   2m24s
 For more info about K3d please follow: https://k3d.io/v5.6.0/
 
 ## Install Kubernetes Dashboard using HELM chart
+
+**Note these steps of "Install Kubernetes Dashboard using HELM chart" can be automated using this bash script `k8s-dashboard.sh`. To run this script using this command:**
+```
+chmod 755 k8s-dashboard.sh
+./k8s-dashboard.sh
+```
+
+
+
+### Setps:
+
 - Add the helm repo
 ```dtd
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard
