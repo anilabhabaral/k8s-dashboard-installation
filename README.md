@@ -28,6 +28,14 @@ kube-node-lease   Active   2m24s
 ```
 
 ## Install Kubernetes Dashboard using HELM chart
+- Add the helm repo
+```dtd
+helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard
+```
+- Install and deploy the helm chart of the Kubernetes dashboard in default namespace
+```dtd
+helm install dashboard kubernetes-dashboard/kubernetes-dashboard
+```
 
 - Create a new serviceaccount
 ```dtd
@@ -64,6 +72,10 @@ EOF
 $ kubectl get clusterrolebinding | grep admin-test-cluster-role-binding                    
 admin-test-cluster-role-binding                        ClusterRole/cluster-admin                                          3m54s
 
+```
+- Create sign in token and copy to clipboard to login in kubernetes dashboard
+```dtd
+kubectl -n default create token admin-test
 ```
 
 
