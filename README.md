@@ -37,6 +37,43 @@ helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard
 helm install dashboard kubernetes-dashboard/kubernetes-dashboard
 ```
 
+- Check all the resource in the default namespace
+```dtd
+$ kubectl get all -n default                
+NAME                                                                  READY   STATUS    RESTARTS   AGE
+pod/dashboard-kubernetes-dashboard-auth-5f7969b95c-4nxgj              1/1     Running   0          27m
+pod/dashboard-kubernetes-dashboard-api-65dd9fcc5f-qhxq2               1/1     Running   0          27m
+pod/dashboard-kubernetes-dashboard-api-65dd9fcc5f-fl2pz               1/1     Running   0          27m
+pod/dashboard-kubernetes-dashboard-api-65dd9fcc5f-rn2ct               1/1     Running   0          27m
+pod/dashboard-kubernetes-dashboard-metrics-scraper-54bd5c86cc-j4wf7   1/1     Running   0          27m
+pod/dashboard-kubernetes-dashboard-web-79bbd9c596-lnrxt               1/1     Running   0          27m
+pod/dashboard-kong-86dc477466-xmm7k                                   1/1     Running   0          27m
+
+NAME                                                     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
+service/kubernetes                                       ClusterIP   10.43.0.1       <none>        443/TCP                         52m
+service/dashboard-kong-manager                           NodePort    10.43.146.112   <none>        8002:31027/TCP,8445:30964/TCP   27m
+service/dashboard-kubernetes-dashboard-metrics-scraper   ClusterIP   10.43.143.225   <none>        8000/TCP                        27m
+service/dashboard-kubernetes-dashboard-auth              ClusterIP   10.43.60.125    <none>        8000/TCP                        27m
+service/dashboard-kubernetes-dashboard-web               ClusterIP   10.43.67.131    <none>        8000/TCP                        27m
+service/dashboard-kubernetes-dashboard-api               ClusterIP   10.43.80.236    <none>        8000/TCP                        27m
+service/dashboard-kong-proxy                             NodePort    10.43.146.244   <none>        443:31372/TCP                   27m <------- Previously it was ClusterIP but to access the dashboard change it to NodePort type using `$ kubectl edit service/dashboard-kong-proxy`  
+
+NAME                                                             READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/dashboard-kubernetes-dashboard-auth              1/1     1            1           27m
+deployment.apps/dashboard-kubernetes-dashboard-api               3/3     3            3           27m
+deployment.apps/dashboard-kubernetes-dashboard-metrics-scraper   1/1     1            1           27m
+deployment.apps/dashboard-kubernetes-dashboard-web               1/1     1            1           27m
+deployment.apps/dashboard-kong                                   1/1     1            1           27m
+
+NAME                                                                        DESIRED   CURRENT   READY   AGE
+replicaset.apps/dashboard-kubernetes-dashboard-auth-5f7969b95c              1         1         1       27m
+replicaset.apps/dashboard-kubernetes-dashboard-api-65dd9fcc5f               3         3         3       27m
+replicaset.apps/dashboard-kubernetes-dashboard-metrics-scraper-54bd5c86cc   1         1         1       27m
+replicaset.apps/dashboard-kubernetes-dashboard-web-79bbd9c596               1         1         1       27m
+replicaset.apps/dashboard-kong-86dc477466                                   1         1         1       27m
+
+```
+
 - Create a new serviceaccount
 ```dtd
 $ kubectl create sa admin-test              
@@ -73,9 +110,16 @@ $ kubectl get clusterrolebinding | grep admin-test-cluster-role-binding
 admin-test-cluster-role-binding                        ClusterRole/cluster-admin                                          3m54s
 
 ```
+- Enable fort-forwarding for the service dashboard-kong-proxy:
+```dtd
+kubectl port-forward service/dashboard-kong-proxy 8443:443
+```
+- Access the dashboard using https://127.0.0.1:8443/
 - Create sign in token and copy to clipboard to login in kubernetes dashboard
 ```dtd
 kubectl -n default create token admin-test
 ```
+
+
 
 
