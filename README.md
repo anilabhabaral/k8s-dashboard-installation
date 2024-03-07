@@ -76,9 +76,7 @@ replicaset.apps/dashboard-kong-86dc477466                                   1   
 
 - Create a new serviceaccount
 ```dtd
-$ kubectl create sa admin-test              
-serviceaccount/admin-test created
-
+kubectl create sa admin-test
 ```
 - Check the serviceaccount
 ```dtd
