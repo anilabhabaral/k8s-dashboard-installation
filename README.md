@@ -52,38 +52,39 @@ helm install dashboard kubernetes-dashboard/kubernetes-dashboard
 
 - Check all the resource in the default namespace
 ```dtd
-$ kubectl get all -n default                
+$ kubectl get all
 NAME                                                                  READY   STATUS    RESTARTS   AGE
-pod/dashboard-kubernetes-dashboard-auth-5f7969b95c-4nxgj              1/1     Running   0          27m
-pod/dashboard-kubernetes-dashboard-api-65dd9fcc5f-qhxq2               1/1     Running   0          27m
-pod/dashboard-kubernetes-dashboard-api-65dd9fcc5f-fl2pz               1/1     Running   0          27m
-pod/dashboard-kubernetes-dashboard-api-65dd9fcc5f-rn2ct               1/1     Running   0          27m
-pod/dashboard-kubernetes-dashboard-metrics-scraper-54bd5c86cc-j4wf7   1/1     Running   0          27m
-pod/dashboard-kubernetes-dashboard-web-79bbd9c596-lnrxt               1/1     Running   0          27m
-pod/dashboard-kong-86dc477466-xmm7k                                   1/1     Running   0          27m
+pod/dashboard-kubernetes-dashboard-auth-5747c44dd8-9dbqp              1/1     Running   0          83s
+pod/dashboard-kubernetes-dashboard-api-cc5fbcd75-blfv6                1/1     Running   0          83s
+pod/dashboard-kubernetes-dashboard-api-cc5fbcd75-p78q2                1/1     Running   0          83s
+pod/dashboard-kubernetes-dashboard-api-cc5fbcd75-cxmrw                1/1     Running   0          83s
+pod/dashboard-kubernetes-dashboard-metrics-scraper-78c75bb898-jzbt8   1/1     Running   0          83s
+pod/dashboard-kubernetes-dashboard-web-549554bddb-t8wrh               1/1     Running   0          83s
+pod/dashboard-kong-86dc477466-gh7bs                                   1/1     Running   0          83s
 
 NAME                                                     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)                         AGE
-service/kubernetes                                       ClusterIP   10.43.0.1       <none>        443/TCP                         52m
-service/dashboard-kong-manager                           NodePort    10.43.146.112   <none>        8002:31027/TCP,8445:30964/TCP   27m
-service/dashboard-kubernetes-dashboard-metrics-scraper   ClusterIP   10.43.143.225   <none>        8000/TCP                        27m
-service/dashboard-kubernetes-dashboard-auth              ClusterIP   10.43.60.125    <none>        8000/TCP                        27m
-service/dashboard-kubernetes-dashboard-web               ClusterIP   10.43.67.131    <none>        8000/TCP                        27m
-service/dashboard-kubernetes-dashboard-api               ClusterIP   10.43.80.236    <none>        8000/TCP                        27m
-service/dashboard-kong-proxy                             NodePort    10.43.146.244   <none>        443:31372/TCP                   27m <------- Previously it was ClusterIP but to access the dashboard change it to NodePort type using `$ kubectl edit service/dashboard-kong-proxy`  
+service/kubernetes                                       ClusterIP   10.43.0.1       <none>        443/TCP                         119s
+service/dashboard-kubernetes-dashboard-web               ClusterIP   10.43.94.146    <none>        8000/TCP                        83s
+service/dashboard-kong-manager                           NodePort    10.43.53.80     <none>        8002:30172/TCP,8445:30700/TCP   83s
+service/dashboard-kong-proxy                             ClusterIP   10.43.35.128    <none>        443/TCP                         83s
+service/dashboard-kubernetes-dashboard-api               ClusterIP   10.43.21.2      <none>        8000/TCP                        83s
+service/dashboard-kubernetes-dashboard-metrics-scraper   ClusterIP   10.43.129.240   <none>        8000/TCP                        83s
+service/dashboard-kubernetes-dashboard-auth              ClusterIP   10.43.176.47    <none>        8000/TCP                        83s
 
 NAME                                                             READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/dashboard-kubernetes-dashboard-auth              1/1     1            1           27m
-deployment.apps/dashboard-kubernetes-dashboard-api               3/3     3            3           27m
-deployment.apps/dashboard-kubernetes-dashboard-metrics-scraper   1/1     1            1           27m
-deployment.apps/dashboard-kubernetes-dashboard-web               1/1     1            1           27m
-deployment.apps/dashboard-kong                                   1/1     1            1           27m
+deployment.apps/dashboard-kubernetes-dashboard-auth              1/1     1            1           83s
+deployment.apps/dashboard-kubernetes-dashboard-api               3/3     3            3           83s
+deployment.apps/dashboard-kubernetes-dashboard-metrics-scraper   1/1     1            1           83s
+deployment.apps/dashboard-kubernetes-dashboard-web               1/1     1            1           83s
+deployment.apps/dashboard-kong                                   1/1     1            1           83s
 
 NAME                                                                        DESIRED   CURRENT   READY   AGE
-replicaset.apps/dashboard-kubernetes-dashboard-auth-5f7969b95c              1         1         1       27m
-replicaset.apps/dashboard-kubernetes-dashboard-api-65dd9fcc5f               3         3         3       27m
-replicaset.apps/dashboard-kubernetes-dashboard-metrics-scraper-54bd5c86cc   1         1         1       27m
-replicaset.apps/dashboard-kubernetes-dashboard-web-79bbd9c596               1         1         1       27m
-replicaset.apps/dashboard-kong-86dc477466                                   1         1         1       27m
+replicaset.apps/dashboard-kubernetes-dashboard-auth-5747c44dd8              1         1         1       83s
+replicaset.apps/dashboard-kubernetes-dashboard-api-cc5fbcd75                3         3         3       83s
+replicaset.apps/dashboard-kubernetes-dashboard-metrics-scraper-78c75bb898   1         1         1       83s
+replicaset.apps/dashboard-kubernetes-dashboard-web-549554bddb               1         1         1       83s
+replicaset.apps/dashboard-kong-86dc477466                                   1         1         1       83s
+
 
 ```
 
