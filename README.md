@@ -120,7 +120,7 @@ kubectl port-forward service/dashboard-kong-proxy 8443:443
 kubectl -n default create token admin-test
 ```
 ![fig-1](https://github.com/anilabhabaral/k8s-dashboard-installation/blob/main/screenshot/login.png)
-- kubernetes DashBoard
+- Kubernetes DashBoard
 ![fig-2](https://github.com/anilabhabaral/k8s-dashboard-installation/blob/main/screenshot/dashboard.png)
 
 
