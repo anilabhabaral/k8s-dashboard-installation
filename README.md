@@ -27,7 +27,7 @@ kube-node-lease   Active   2m24s
 
 ```
 
-### Install Kubernetes Dashboard using HELM chart
+## Install Kubernetes Dashboard using HELM chart
 
 - Create a new serviceaccount
 ```dtd
