@@ -27,6 +27,8 @@ kube-node-lease   Active   2m24s
 
 ```
 
+For more info about K3d please follow: https://k3d.io/v5.6.0/
+
 ## Install Kubernetes Dashboard using HELM chart
 - Add the helm repo
 ```dtd
