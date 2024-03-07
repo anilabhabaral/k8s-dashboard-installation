@@ -118,7 +118,10 @@ kubectl port-forward service/dashboard-kong-proxy 8443:443
 - Create sign in token and copy to clipboard to login in kubernetes dashboard
 ```dtd
 kubectl -n default create token admin-test
-```login
+```
+![fig-1](https://github.com/anilabhabaral/k8s-dashboard-installation/blob/main/screenshot/login.png)
+- kubernetes DashBoard
+![fig-2](https://github.com/anilabhabaral/k8s-dashboard-installation/blob/main/screenshot/dashboard.png)
 
 
 
