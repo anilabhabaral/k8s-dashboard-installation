@@ -27,7 +27,7 @@ subjects:
     namespace: default
 EOF
 
-
+echo "Craeting token..... ** Note it is valid for one hour **"
 echo -e '\n'
 echo -e '\n'
 
