@@ -1,6 +1,6 @@
 ## k8s dashboard installation
 
-- Install K3D
+- Install K3D in MacBook
 ```
 brew install k3d
 ```
@@ -9,7 +9,7 @@ brew install k3d
 ```
 k3d cluster create mycluster
 ```
-- check the node
+- Check the node
 ```dtd
 $ kubectl get node                                                                                                                  
 NAME                     STATUS   ROLES                  AGE   VERSION
@@ -29,4 +29,41 @@ kube-node-lease   Active   2m24s
 
 ### Install Kubernetes Dashboard using HELM chart
 
-- 
+- Create a new serviceaccount
+```dtd
+$ kubectl create sa admin-test              
+serviceaccount/admin-test created
+
+```
+- Check the serviceaccount
+```dtd
+$ kubectl get sa              
+NAME         SECRETS   AGE
+default      0         15m
+admin-test   0         2m45s
+```
+- Create new cluster role binding and bind the above created serviceaccount
+```dtd
+$ cat <<EOF | kubectl -n default apply -f -
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-test-cluster-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: admin-test
+    namespace: default
+EOF
+```
+- Check the newly created serviceaccount
+```dtd
+$ kubectl get clusterrolebinding | grep admin-test-cluster-role-binding                    
+admin-test-cluster-role-binding                        ClusterRole/cluster-admin                                          3m54s
+
+```
+
+
